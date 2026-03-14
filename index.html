@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Small Message</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+color:white;
+font-family:'Playfair Display',serif;
+background:#020617;
+overflow-x:hidden;
+}
+
+/* STARS */
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+animation:moveStars 120s linear infinite;
+opacity:0.3;
+z-index:-1;
+}
+
+@keyframes moveStars{
+from{background-position:0 0;}
+to{background-position:2000px 2000px;}
+}
+
+/* SECTION */
+
+.section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+text-align:center;
+}
+
+/* TITLE */
+
+h1{
+font-family:'Great Vibes',cursive;
+font-size:70px;
+}
+
+/* BUTTON */
+
+button{
+margin-top:30px;
+padding:14px 36px;
+border:none;
+border-radius:40px;
+background:linear-gradient(45deg,#ff4f81,#ff7aa2);
+color:white;
+font-size:18px;
+cursor:pointer;
+box-shadow:0 6px 25px rgba(255,80,120,0.5);
+}
+
+/* MESSAGE */
+
+#message{
+max-width:760px;
+font-size:22px;
+line-height:1.9;
+text-align:left;
+margin-top:40px;
+}
+
+#message p{
+margin-bottom:30px;
+}
+
+/* ILLUSTRATION */
+
+.illustration{
+margin-top:80px;
+text-align:center;
+}
+
+.illustration img{
+width:300px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(255,255,255,0.2);
+}
+
+/* MEET QUESTION */
+
+#meet{
+display:none;
+margin-top:60px;
+}
+
+#meet h3{
+font-size:28px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<!-- INTRO -->
+
+<div class="section">
+
+<h1>Hi Sai 💫</h1>
+
+<p>There is something I should have said a long time ago.</p>
+
+<button onclick="start()">Continue</button>
+
+</div>
+
+<!-- STORY -->
+
+<div class="section" id="story">
+
+<h2>Just something I wanted to say</h2>
+
+<div id="message"></div>
+
+<!-- Illustration -->
+
+<div class="illustration">
+
+<img src="https://w7.pngwing.com/pngs/714/930/png-transparent-yellow-sorry-emoji-illustration-desktop-sorry-smiley-sorry-love-miscellaneous-sticker-thumbnail.png">
+
+<p style="opacity:0.7;margin-top:10px;">
+Some memories stay longer than we expect.
+</p>
+
+</div>
+
+<!-- Meet question -->
+
+<div id="meet">
+
+<h3>
+If you're comfortable… would you like to meet once sometime? ☕
+</h3>
+
+<p style="opacity:0.8;">
+No pressure at all. It's completely okay if you don't want to.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+/* SCROLL */
+
+function start(){
+
+document.getElementById("story").scrollIntoView({
+behavior:"smooth"
+})
+
+startTyping()
+
+}
+
+/* MESSAGE */
+
+const paragraphs=[
+
+"Sai 🙂",
+
+"This is something I should have said a long time ago 💭. For the past two years there hasn’t been a single time I remembered those days without realizing that I made a mistake.",
+
+"We had such a genuine and comfortable friendship — meeting randomly, going for lunch 🍜, talking freely, laughing about small things 😄. Those simple moments actually meant a lot to me.",
+
+"Then something happened and in that moment I made a decision that I still regret today 💔.",
+
+"When things went wrong I should have taken your side. But I didn’t, and because of that our friendship ended.",
+
+"I understand why you chose to ignore me later. You had every right.",
+
+"But losing that friendship has always stayed in my mind as one of my biggest regrets.",
+
+"I tried messaging you many times. Not because I expected things to become normal again, but because I just wanted to say one thing clearly.",
+
+"I'm truly sorry 🙏.",
+
+"Maybe things can never go back to how they were, and I completely respect that.",
+
+"So this is simply me saying what I should have said long ago: I'm genuinely sorry for what happened 💔.",
+
+"That's all I wanted to say. Take care 🙂"
+
+]
+
+let pIndex=0
+let cIndex=0
+
+function startTyping(){
+
+const container=document.getElementById("message")
+
+function type(){
+
+if(pIndex<paragraphs.length){
+
+let p
+
+if(!container.lastElementChild || container.lastElementChild.dataset.done==="true"){
+
+p=document.createElement("p")
+container.appendChild(p)
+
+}else{
+
+p=container.lastElementChild
+
+}
+
+if(cIndex<paragraphs[pIndex].length){
+
+p.innerHTML+=paragraphs[pIndex].charAt(cIndex)
+
+cIndex++
+
+setTimeout(type,15)
+
+}else{
+
+p.dataset.done="true"
+
+pIndex++
+cIndex=0
+
+if(pIndex===paragraphs.length){
+
+setTimeout(()=>{
+document.getElementById("meet").style.display="block"
+},1000)
+
+}else{
+
+setTimeout(type,400)
+
+}
+
+}
+
+}
+
+}
+
+type()
+
+}
+
+</script>
+
+</body>
+</html>
